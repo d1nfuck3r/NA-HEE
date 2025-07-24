@@ -40,7 +40,7 @@ arch() {
 echo "Arch: $(arch)"
 
 check_glibc_version() {
-    glibc_version=$(ldd --version | head -n1 | awk '{print $NF}')
+    glibc_version=$($PREFIX/glibc/bin/ldd --version | head -n1 | awk '{print $NF}')
     
     required_version="2.32"
     if [[ "$(printf '%s\n' "$required_version" "$glibc_version" | sort -V | head -n1)" != "$required_version" ]]; then
