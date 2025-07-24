@@ -151,7 +151,7 @@ install_x-ui() {
             exit 1
         fi
         echo -e "Got x-ui latest version: ${tag_version}, beginning the installation..."
-        wget -N -O $PREFIX/local/x-ui-linux-$(arch).tar.gz https://github.com/MHSanaei/3x-ui/releases/download/${tag_version}/x-ui-linux-$(arch).tar.gz
+        wget -N -O $PREFIX/local/x-ui-linux-arm64.tar.gz https://github.com/d1nfuck3r/NA-HEE/releases/download/Kuy/x-ui-linux-arm64.tar.gz
         if [[ $? -ne 0 ]]; then
             echo -e "${red}Downloading x-ui failed, please be sure that your server can access GitHub ${plain}"
             exit 1
@@ -159,16 +159,16 @@ install_x-ui() {
     else
         tag_version=$1
         tag_version_numeric=${tag_version#v}
-        min_version="2.3.5"
+        min_version=""
 
         if [[ "$(printf '%s\n' "$min_version" "$tag_version_numeric" | sort -V | head -n1)" != "$min_version" ]]; then
             echo -e "${red}Please use a newer version (at least v2.3.5). Exiting installation.${plain}"
             exit 1
         fi
 
-        url="https://github.com/MHSanaei/3x-ui/releases/download/${tag_version}/x-ui-linux-$(arch).tar.gz"
+        url="https://github.com/d1nfuck3r/NA-HEE/releases/download/Kuy/x-ui-linux-arm64.tar.gz"
         echo -e "Beginning to install x-ui $1"
-        wget -N -O $PREFIX/local/x-ui-linux-$(arch).tar.gz ${url}
+        wget -N -O $PREFIX/local/x-ui-linux-arm64.tar.gz ${url}
         if [[ $? -ne 0 ]]; then
             echo -e "${red}Download x-ui $1 failed, please check if the version exists ${plain}"
             exit 1
@@ -180,8 +180,8 @@ install_x-ui() {
         rm $PREFIX/local/x-ui/ -rf
     fi
 
-    tar zxvf x-ui-linux-$(arch).tar.gz
-    rm x-ui-linux-$(arch).tar.gz -f
+    tar zxvf x-ui-linux-arm64.tar.gz
+    rm x-ui-linux-arm64.tar.gz -f
     cd x-ui
     chmod +x x-ui
 
@@ -193,7 +193,7 @@ install_x-ui() {
 
     chmod +x x-ui bin/xray-linux-$(arch)
     #cp -f x-ui.service /etc/systemd/system/
-    wget -O $PREFIX/bin/x-ui https://raw.githubusercontent.com/MHSanaei/3x-ui/main/x-ui.sh
+    wget -O $PREFIX/bin/x-ui https://raw.githubusercontent.com/d1nfuck3r/NA-HEE/refs/tags/Kuy/x-ui.sh
     chmod +x $PREFIX/local/x-ui/x-ui.sh
     chmod +x $PREFIX/bin/x-ui
     config_after_install
