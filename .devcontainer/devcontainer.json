@@ -1,25 +1,12 @@
 {
-  "name": "Docker Systemd Ubuntu",
-  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-22.04",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-azuretools.vscode-docker",
-        "ms-vscode-remote.remote-containers"
-      ]
-    }
+  "name": "Systemd Ubuntu 22.04",
+  "build": {
+    "dockerfile": "ubuntu/22.04.Dockerfile"
   },
   "runArgs": [
     "--privileged",
-    "--cap-add=SYS_ADMIN",
-    "--security-opt",
-    "seccomp=unconfined"
+    "-v /sys/fs/cgroup:/sys/fs/cgroup:rw",
+    "--cgroupns=host"
   ],
-  "containerEnv": {
-    "DOCKER_BUILDKIT": "1"
-  },
-  "postCreateCommand": "docker --version && systemctl --version"
+  "remoteUser": "root"
 }
